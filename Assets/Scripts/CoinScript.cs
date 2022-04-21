@@ -6,7 +6,7 @@ using static Stats;
 public class CoinScript : MonoBehaviour
 {
 
-    public Stats stats;
+    
 
 
     public void OnTriggerEnter (Collider other)
@@ -17,13 +17,15 @@ public class CoinScript : MonoBehaviour
             Destroy(gameObject);
             currentCoin++;
         }
-
-
-
-
     }
 
+    public void Collect()
+    {
 
+        Destroy(gameObject);
+        currentCoin++;
+
+    }
 
 
 }

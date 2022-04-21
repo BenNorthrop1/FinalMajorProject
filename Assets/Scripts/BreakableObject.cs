@@ -8,6 +8,8 @@ public class BreakableObject : MonoBehaviour
 
     public GameObject Coin;
 
+    public bool spawnCoin;
+
     public void Start()
     {
        
@@ -26,8 +28,8 @@ public class BreakableObject : MonoBehaviour
         Destroy(gameObject);
         Destroy(Clone, 5.0f);
 
-        
-
+        if(spawnCoin == true)
+        {
         int[] amount = new int[] {1, 2, 3, 4, 5};
 
         int randomValue = Random.Range(0, amount .Length -1);
@@ -37,7 +39,9 @@ public class BreakableObject : MonoBehaviour
         {
             Instantiate(Coin, transform.position , transform.rotation);
         }
-          
+
+        }
+    
     }
 
 

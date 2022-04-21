@@ -7,24 +7,35 @@ public class WeaponScript : MonoBehaviour
 {
     public string WeaponName;
 
+    public CamShake cShake;
+
+    public bool Aim;
+
     public int damage;
     public float 
     timeBetweenShooting,
     spread,
     range,
     reloadTime,
-    timeBetweenShots;
+    timeBetweenShots,
+    camShakeMagnitude,
+    camShakeDuration,
+    adsSpeed;
     public float impactForce = 30f;
     public int magazineSize, bulletsPerTap;
     public bool buttonHold;
+
     int bulletsLeft , bulletsShot;
     
     bool shooting , readyToShoot, reloading;
 
-    public Camera fpsCam;
-    public Transform attackPoint;
+    public Camera MainCam;
+    //public Camera WeaponCam;
     public RaycastHit rayHit;
     public LayerMask Enemy;
+
+    private Vector3 originalPos;
+    public Vector3 aimPos;
 
     public ParticleSystem muzzleflash;
     public GameObject impactEffect;
@@ -35,12 +46,13 @@ public class WeaponScript : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
-
+        originalPos = transform.localPosition;
     }
 
     private void Update()
     {
         M_Input();
+        AimDownSight();
 
         AmmoUi.SetText(bulletsLeft + " / " + magazineSize);
     }
@@ -60,26 +72,51 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
+    private void AimDownSight()
+    {
+        if(Input.GetButton("Fire2") && !reloading || Aim)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, aimPos, Time.deltaTime * adsSpeed);
+            
+        }
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPos, Time.deltaTime * adsSpeed);
+        }
+    }
+
 
     private void Shoot()
     {
         muzzleflash.Play();
         readyToShoot = false;
 
-        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range))
-        {
-            Debug.Log(rayHit.collider.name);
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+        
+        Vector3 direction = MainCam.transform.forward + new Vector3(x, y , 0);
 
+        if(Physics.Raycast(MainCam.transform.position, direction,  out rayHit, range))
+        {
+
+            //This makes it so if the object has the Targert Script it takes damage
             Target target = rayHit.transform.GetComponent<Target>();
             if (target != null)
             {
                 target.TakeDamage(damage);
             }
 
+            //This makes it so if the object has the crate script it breaks it 
             BreakableObject b_Object = rayHit.transform.GetComponent<BreakableObject>();
             if(b_Object != null)
             {
                 b_Object.Break();
+            }
+
+            CoinScript coin = rayHit.transform.GetComponent<CoinScript>();
+            if(coin != null)
+            {
+                coin.Collect();
             }
 
             if (rayHit.rigidbody != null)
@@ -92,11 +129,15 @@ public class WeaponScript : MonoBehaviour
             Destroy(impactGO, 2f);
         }
 
-      
+        cShake.Shake(camShakeDuration,camShakeMagnitude);
 
         bulletsLeft--;
         bulletsShot--;
-        Invoke("ResetShot", timeBetweenShooting);
+
+        if(!IsInvoking("ResetShot") && !readyToShoot)
+        {
+            Invoke("ResetShot", timeBetweenShooting);
+        }
 
         if(bulletsShot > 0 && bulletsLeft > 0)
         Invoke("Shoot", timeBetweenShots);
@@ -120,7 +161,11 @@ public class WeaponScript : MonoBehaviour
         reloading = false;
     }
 
-
+    private void SetFieldOfView(float fov)
+    {
+        MainCam.fieldOfView = fov;
+        //WeaponCam.fieldOfView = fov;
+    }
 
 
 }

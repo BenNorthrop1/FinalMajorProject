@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,14 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
-    Animator anim;
 
     public float walkSpeed = 20f,
     sprintSpeed = 18f,
     crouchMultiplier = 2f,
     JumpHeight = 3f,
-    standingHeight = 1.8f,
-    crouchHeight = 1.4f,
+    standingHeight = 3.2f,
+    crouchHeight = 1.8f,
     gravity = -9.81f,
     groundDistance = 0.4f;
 
@@ -29,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+       
         regular = walkSpeed;
         controller.height = standingHeight;
     }
@@ -59,8 +58,7 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        anim.SetFloat("zMove" , z);
-        anim.SetFloat("xMove" , x);
+       
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -79,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Crouch()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift)&& isGrounded)
+        if (Input.GetKeyDown(KeyCode.LeftControl)&& isGrounded)
         {
             isCrouching = true;
         }
@@ -98,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
             controller.height = standingHeight;
         }
 
-         if ((controller.collisionFlags & CollisionFlags.Above) != 0)
+        if ((controller.collisionFlags & CollisionFlags.Above) != 0)
         {
             velocity.y = -2f;
         }
@@ -111,4 +109,5 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
         }
     }
+    
 }
