@@ -32,7 +32,7 @@ public class WeaponScript : MonoBehaviour
     public Camera MainCam;
     //public Camera WeaponCam;
     public RaycastHit rayHit;
-    public LayerMask Enemy;
+    public LayerMask Enemy,Player;
 
     private Vector3 originalPos;
     public Vector3 aimPos;
@@ -96,7 +96,7 @@ public class WeaponScript : MonoBehaviour
         
         Vector3 direction = MainCam.transform.forward + new Vector3(x, y , 0);
 
-        if(Physics.Raycast(MainCam.transform.position, direction,  out rayHit, range))
+        if(Physics.Raycast(MainCam.transform.position, direction,  out rayHit, range, ~Player))
         {
 
             //This makes it so if the object has the Targert Script it takes damage

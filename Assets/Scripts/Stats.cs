@@ -5,7 +5,8 @@ using TMPro;
 
 public class Stats : MonoBehaviour
 {
-    public static float Health;
+    public static float maxHealth;
+    public static float health;
     public static int currentCoin;
     public TextMeshProUGUI coinsUi;
 
