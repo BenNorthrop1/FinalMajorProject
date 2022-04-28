@@ -38,6 +38,7 @@ public class WeaponSway : MonoBehaviour
         Sway();
         Tilt();
 
+        
     }
 
     private void CalculateSway()
@@ -65,6 +66,8 @@ public class WeaponSway : MonoBehaviour
         Quaternion finalRotation = Quaternion.Euler(rotationX ? tiltY : 0f, rotationY ? tiltX : 0f, rotationZ ? tiltX : 0f);
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, finalRotation * initialRot, Time.deltaTime * smoothRotation);
+
+        
     }
 
 }

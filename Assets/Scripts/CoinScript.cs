@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Stats;
 
-public class CoinScript : MonoBehaviour
+public class CoinScript : MonoBehaviour, IInteractable
 {
 
-    
+
 
 
     public void OnTriggerEnter (Collider other)
@@ -27,5 +27,14 @@ public class CoinScript : MonoBehaviour
 
     }
 
+    public void Interact()
+    {
+        Destroy(gameObject);
+        currentCoin++;
+    }
 
+    public string GetDescription()
+    {
+       return "Pick up Coin";
+    }
 }
