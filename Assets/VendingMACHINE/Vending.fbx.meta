@@ -1,9 +1,59 @@
 fileFormatVersion: 2
-guid: 0d6ecd030d2a2fd449bca96e5da8e0eb
+guid: 8a9f96c42225cdb49abcdc13367cc5eb
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: 09de4fe0f2fbce84fa6c55417a369b2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: ab3490007b4be6144b6258252ab1e5cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 6c30d02eceafc894c8d8b49df2b3bfe9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: 09de4fe0f2fbce84fa6c55417a369b2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: 7c82644c069f5f64190499726ed896a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 563157ec835b65e4991cab5c4765ffde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WUHU
+    second: {fileID: 2100000, guid: 82db453950f3b734a80d044dfd466b2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WiiVendingMachine Text
+    second: {fileID: 2100000, guid: 8a051018cb6436e488577f4b9e2ec459, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WUHU
+    second: {fileID: 2800000, guid: 5ac9c23500f415047997b61373ebeb00, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WiiVendingMachine Text
+    second: {fileID: 2800000, guid: d5bda86c11b9ea14d858aaeec10606e8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

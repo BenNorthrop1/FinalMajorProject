@@ -9,7 +9,7 @@ public class WeaponScript : MonoBehaviour
 
     public CamShake cShake;
 
-    public bool Aim;
+   
 
     public int damage;
     public float 
@@ -47,6 +47,7 @@ public class WeaponScript : MonoBehaviour
         bulletsLeft = magazineSize;
         readyToShoot = true;
         originalPos = transform.localPosition;
+        reloading = false;
     }
 
     private void Update()
@@ -74,7 +75,7 @@ public class WeaponScript : MonoBehaviour
 
     private void AimDownSight()
     {
-        if(Input.GetButton("Fire2") && !reloading || Aim)
+        if(Input.GetButton("Fire2") && !reloading)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, aimPos, Time.deltaTime * adsSpeed);
             
