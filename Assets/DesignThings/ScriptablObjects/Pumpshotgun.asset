@@ -20,4 +20,4 @@ MonoBehaviour:
   magazineCount: 8
   range: 100
   weaponType: 3
-  WeaponClass: 1
+  WeaponClass: 0

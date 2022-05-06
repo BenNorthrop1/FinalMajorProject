@@ -11,6 +11,7 @@ public class Weapon : Item
     public float range;
 
     public WeaponType weaponType;
+    
     public WeaponClass WeaponClass;
 
 
@@ -19,4 +20,5 @@ public class Weapon : Item
 }
 
 public enum WeaponType{melee, pistol, assault_Rifle, shotgun, sniper , submachine_Gun, rpg};
+
 public enum WeaponClass{primary, secondary, melee , sencondaryMelee};

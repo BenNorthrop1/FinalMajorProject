@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
-    private Animator anim;
 
-    public float walkSpeed = 20f,
-    JumpHeight = 3f,
-    gravity = -9.81f,
-    groundDistance = 0.4f,
-    sprintingMultiplier,
-    crounchMultiplier,
-    crouchingHeight,
-    standingHeight;
+
+    private CharacterController controller;
+    private Animator anim; 
+
+    [Header("Player Movement Variables")]
+    
+    [SerializeField] private float walkSpeed = 20f;
+    [SerializeField] private float JumpHeight = 3f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private float sprintingMultiplier;
+    [SerializeField] private float crounchMultiplier;
+    [SerializeField] private float crouchingHeight;
+    [SerializeField] private float standingHeight;
+    [SerializeField] private float maxStamina;
+    private float currentStamina;
+
 
    
     private float regular = 0f;
     private bool isGrounded ,isCrouching, isSprinting;
+
+    [Space(40)]
+    [Header("Player Movement References")]
 
     public Transform GroundCheck;
     public LayerMask groundmask; 
@@ -28,10 +38,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        GetReferences();
         standingHeight = controller.height;
         regular = walkSpeed;
-     
+        currentStamina = maxStamina;
     }
 
     // Update is called once per frame
@@ -123,6 +133,11 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
         }
+    }
+
+    void GetReferences(){
+        anim = GetComponentInChildren<Animator>();
+        controller = GetComponent<CharacterController>();
     }
     
 }
