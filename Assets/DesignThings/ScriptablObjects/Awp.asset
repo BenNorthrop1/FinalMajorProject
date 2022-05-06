@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2323e070db5f0bb408c08311489c9575, type: 3}
+  m_Name: Awp
+  m_EditorClassIdentifier: 
+  itemName: Awp
+  itemDescription: Awp Weapon
+  itemIcon: {fileID: 21300000, guid: d96dcd237bb65f346832f60053abcad2, type: 3}
+  prefab: {fileID: 8090026082196756874, guid: 2b33636293349a948a51e997ded038ab, type: 3}
+  magazineSize: 10
+  magazineCount: 4
+  range: 200
+  weaponType: 4
+  WeaponClass: 1
