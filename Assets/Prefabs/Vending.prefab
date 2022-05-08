@@ -211,8 +211,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8377717012269479733}
   - component: {fileID: 8343226453506725099}
-  - component: {fileID: 8343226453506725098}
   - component: {fileID: 4082599446546050601}
+  - component: {fileID: 8207938224467366702}
   m_Layer: 0
   m_Name: Vending
   m_TagString: Untagged
@@ -227,7 +227,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9153691109336149391}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.9913993, y: 1.8802333, z: 2.587254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -245,7 +245,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9153691109336149391}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -253,19 +253,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!65 &8343226453506725098
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9153691109336149391}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.4029753, y: 4.4167724, z: 2.000658}
-  m_Center: {x: -0.17969716, y: 1.7996867, z: 0.014388084}
 --- !u!114 &4082599446546050601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,5 +265,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b758c0b27022f1c4c89ea60eb9a6a4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reward: {fileID: 919132149155446097, guid: e259a4f5051e8fb4d834b316d8df3c46, type: 3}
+  reward: {fileID: 0}
   rewardSpawnPos: {fileID: 8700821070746962866}
+--- !u!65 &8207938224467366702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153691109336149391}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.320709, y: 7.8718367, z: 3.5966492}
+  m_Center: {x: -0.3690033, y: 3.2722402, z: -0.006576538}

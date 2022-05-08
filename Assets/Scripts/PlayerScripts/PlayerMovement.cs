@@ -9,25 +9,24 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Animator anim; 
 
-    [Header("Player Movement Variables")]
+    [Header("Player Movement Variables")] // this is used to make it more organised in the insepctor
     
-    [SerializeField] private float walkSpeed = 20f;
-    [SerializeField] private float JumpHeight = 3f;
-    [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float groundDistance = 0.4f;
-    [SerializeField] private float sprintingMultiplier;
+    [SerializeField] private float regularSpeedMoveSpeed;
+    [SerializeField] private float sprintingMoveSpeed;
     [SerializeField] private float crounchMultiplier;
+    [SerializeField] private float JumpHeight;
+    [SerializeField] private float gravity;
+    [SerializeField] private float forceMagnitude;
+    [SerializeField] private float maxStamina;
+    [SerializeField] private float groundDistance;
+    private float currentStamina;
+    private float regularSpeed;
     [SerializeField] private float crouchingHeight;
     [SerializeField] private float standingHeight;
-    [SerializeField] private float maxStamina;
-    private float currentStamina;
 
-
-   
-    private float regular = 0f;
     private bool isGrounded ,isCrouching, isSprinting;
 
-    [Space(40)]
+    [Space(20)]
     [Header("Player Movement References")]
 
     public Transform GroundCheck;
@@ -40,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GetReferences();
         standingHeight = controller.height;
-        regular = walkSpeed;
+        regularSpeed = regularSpeedMoveSpeed;
         currentStamina = maxStamina;
     }
 
@@ -92,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         if(isCrouching == true)
         {
             controller.height = crouchingHeight;
-            walkSpeed *= crounchMultiplier;
+            regularSpeedMoveSpeed *= crounchMultiplier;
         }
         else
         {
@@ -101,37 +100,36 @@ public class PlayerMovement : MonoBehaviour
 
         if(isSprinting == true)
         {
-            walkSpeed = sprintingMultiplier;
+            regularSpeedMoveSpeed = sprintingMoveSpeed;
         }
         else
         {
-            walkSpeed = regular;
+            regularSpeedMoveSpeed = regularSpeed;
         }
 
-        if(move == Vector3.zero)
-        {
-            anim.SetFloat("Speed", 0, 0.2f , Time.deltaTime);
-        }
-        else if (move != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
-        {
-            anim.SetFloat("Speed", 0.5f, 0.2f , Time.deltaTime);
-        }
-        else if (move != Vector3.zero && Input.GetKey(KeyCode.LeftShift))
-        {
-            anim.SetFloat("Speed", 1f, 0.2f , Time.deltaTime);
-        }
-
-        controller.Move(move * walkSpeed * Time.deltaTime);
+      
+        controller.Move(move * regularSpeedMoveSpeed * Time.deltaTime);
     }
-
-
-   
 
     void Jump()
     {
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody rigidbody = hit.collider.attachedRigidbody;
+
+        if(rigidbody != null)
+        {
+            Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
+            forceDirection.y = 0;
+            forceDirection.Normalize();
+
+            rigidbody.AddForceAtPosition(forceDirection* forceMagnitude, transform.position, ForceMode.Impulse);
         }
     }
 

@@ -5,8 +5,6 @@ using TMPro;
  
 public class PlayerInteraction : MonoBehaviour {
     
-    private Inventory inventory;
-
     public Camera mainCam;
     public float interactionDistance = 2f;
  
@@ -15,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour {
     
     private void Awake()
     {
-        inventory = GetComponent<Inventory>();
+
     }
  
     private void Update() {
@@ -40,13 +38,12 @@ public class PlayerInteraction : MonoBehaviour {
                 }
             }
 
-            if(Input.GetKeyDown(KeyCode.E) && hit.collider.CompareTag("Pickupable"))
-            {
-                Weapon newItem = hit.collider.GetComponent<ItemObject>().item as Weapon;
-                inventory.AddItem(newItem);
-                Destroy(hit.transform.gameObject);
-            }
-           
+                if(Input.GetKeyDown(KeyCode.F)&& hit.collider.CompareTag("Pickupable"))
+                {
+                    PickupController.instance.Pickup(hit.collider.gameObject);
+                }
+
+
         }
  
         interactionUI.SetActive(hitSomething);

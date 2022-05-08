@@ -11,7 +11,6 @@ public class Stats : MonoBehaviour
     public static int currentCoin;
     public TextMeshProUGUI coinsUi;
 
-    [SerializeField] private WeaponUi weaponUi;
 
 
 
@@ -26,8 +25,5 @@ public class Stats : MonoBehaviour
         coinsUi.SetText(currentCoin + "");
     }
 
-    public void UpdateWeaponUI(Weapon newWeapon)
-    {
-        weaponUi.UpdateInfo(newWeapon.itemIcon, newWeapon.magazineSize, newWeapon.magazineCount);
-    }
+
 }
