@@ -91,7 +91,7 @@ Material:
     - NormalStrenght: 1
     - RefractionSpeed: 0.075
     - RefractionStrength: 0.05
-    - Smoothness: 0.326
+    - Smoothness: 0.078
     - WaveAmplitude: 0.05
     - WaveSpeed: 2.51
     - _AlphaClip: 0

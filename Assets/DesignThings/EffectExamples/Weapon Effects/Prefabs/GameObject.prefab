@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4959455230064603458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4712441114939560974}
   - component: {fileID: 4884880184342396676}
   - component: {fileID: 4877928736886910940}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4690,7 +4690,7 @@ GameObject:
   - component: {fileID: 4718265601588134380}
   - component: {fileID: 4878583996077839302}
   - component: {fileID: 4879190533546692296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Decal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
