@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform GroundCheck;
     public LayerMask groundmask; 
+    public Stamina stamina;
 
-    public StaminaBar staminaBar;
     private Vector3 velocity;
 
     public GameObject standingSprite;
@@ -51,6 +51,14 @@ public class PlayerMovement : MonoBehaviour
         standingHeight = controller.height;
         regularSpeed = regularSpeedMoveSpeed;
   
+    }
+
+    public void SetRunSpeed(float speed)
+    {
+        sprintingMoveSpeed = speed;
+
+
+
     }
 
     // Update is called once per frame
@@ -115,18 +123,22 @@ public class PlayerMovement : MonoBehaviour
         if(isSprinting == true)
         {
             regularSpeedMoveSpeed = sprintingMoveSpeed;
-            staminaBar.UseStamina(15);
+
+            if(stamina.playerStamina > 0)
+            {
+                stamina.weAreSprinting = true;
+                stamina.Sprinting();
+            }
         }
         else
         {
             regularSpeedMoveSpeed = regularSpeed;
+            
+
         }
         controller.Move(move * regularSpeedMoveSpeed * Time.deltaTime);
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            staminaBar.UseStamina(15);
-        }
+
 
 
 
@@ -163,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
     void GetReferences(){
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
+        stamina = GetComponent<Stamina>();
     }
     
 }

@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.002
-    second: {fileID: 2100000, guid: 14ea97935a57538409b93c450405a49d, type: 2}
+    second: {fileID: 2100000, guid: fb92c9b5d1eb0d8449d3d4cc19e2044f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.003
-    second: {fileID: 2100000, guid: 14ea97935a57538409b93c450405a49d, type: 2}
+    second: {fileID: 2100000, guid: 8c38acac65b71a644960421af4bce82b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.004
-    second: {fileID: 2100000, guid: d7a87549a92f39c40a3d42ed8ed206d6, type: 2}
+    second: {fileID: 2100000, guid: 994ead4167abde148941850603a55d2a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pants.006
-    second: {fileID: 2100000, guid: 299fa497767749d4193df9780b7bd2f4, type: 2}
+    second: {fileID: 2100000, guid: 994ead4167abde148941850603a55d2a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -54,7 +54,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 2.8
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -105,7 +105,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 2.8
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

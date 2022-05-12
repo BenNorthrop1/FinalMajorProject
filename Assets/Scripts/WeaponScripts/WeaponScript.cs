@@ -78,7 +78,7 @@ public class WeaponScript : MonoBehaviour
         M_Input();
 
 
-        AmmoUi.SetText(bulletsLeft + " / " + magazineSize);
+        AmmoUi.SetText(bulletsLeft.ToString());
     }
 
     private void M_Input()

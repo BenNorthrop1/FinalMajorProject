@@ -1,13 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 using TMPro;
 using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
-    public static float maxHealth;
-    public static float health;
+    public float maxHealth;
+    public float health;
+
+    public static event Action onPlayedDamaged;
+
     public static int currentCoin;
     public TextMeshProUGUI coinsUi;
 
@@ -25,5 +28,18 @@ public class Stats : MonoBehaviour
         coinsUi.SetText(currentCoin + "");
     }
 
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        onPlayedDamaged?.Invoke();
+
+
+        if(health <= 0)
+        {
+            health = 0;
+            Debug.Log("You're Dead");
+        }
+    }
+    
 
 }

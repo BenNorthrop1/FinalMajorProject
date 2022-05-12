@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pickupable
   - FxTemporaire
+  - Light
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Crate
   - Enemy
   - 
-  - 
+  - Icon
   - 
   - muzzle
   - 
