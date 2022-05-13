@@ -123,6 +123,7 @@ public class WeaponScript : MonoBehaviour
     {
         muzzleflash.Play();
         recoilScript.RecoilFire();
+
         readyToShoot = false;
 
         float x = Random.Range(-spread, spread);
@@ -134,10 +135,10 @@ public class WeaponScript : MonoBehaviour
         {
 
             //This makes it so if the object has the Targert Script it takes damage
-            Target target = rayHit.transform.GetComponent<Target>();
-            if (target != null)
+            EnemyAi enemy = rayHit.transform.GetComponent<EnemyAi>();
+            if (enemy != null)
             {
-                target.TakeDamage(damage);
+                enemy.TakeDamage(damage);
             }
 
             //This makes it so if the object has the crate script it breaks it 
