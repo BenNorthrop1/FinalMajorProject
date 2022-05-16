@@ -7,6 +7,8 @@ public class PlayerInteraction : MonoBehaviour {
     
     public Camera mainCam;
     public float interactionDistance = 2f;
+
+    public bool isPickedUp;
  
     public GameObject interactionUI;
     public TextMeshProUGUI interactionText;
@@ -41,8 +43,12 @@ public class PlayerInteraction : MonoBehaviour {
                 if(Input.GetKeyDown(KeyCode.F)&& hit.collider.CompareTag("Pickupable"))
                 {
                     PickupController.instance.Pickup(hit.collider.gameObject);
+                    isPickedUp = true;
                 }
-
+                else
+                {
+                    isPickedUp = false;
+                }
 
         }
  

@@ -6,18 +6,42 @@ public class BreakableObject : MonoBehaviour
 {
     public GameObject desroyedVersion;
 
+    public PlayerInteraction pI;
+
     public GameObject Coin;
 
     public bool spawnCoin;
 
     public void Start()
     {
-       
 
     }
 
+    void Update()
+    {
+
+        
+           
+        
+        
 
 
+        
+
+    
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(pI.isPickedUp = true)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+            }
+        }
+
+    }
 
 
 
@@ -41,6 +65,8 @@ public class BreakableObject : MonoBehaviour
         }
 
         }
+        
+
     
     }
 
