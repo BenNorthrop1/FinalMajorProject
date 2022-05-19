@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
-    public float maxHealth;
-    public float health;
+    public int maxHealth;
+    private int currentHealth;
 
-    public static event Action onPlayedDamaged;
+    public UiManager uiManager;
 
     public static int currentCoin;
     public TextMeshProUGUI coinsUi;
@@ -19,7 +19,8 @@ public class Stats : MonoBehaviour
 
     void Start()
     {
-        
+        currentHealth = maxHealth;
+        uiManager.SetMaxHealth(maxHealth);
     }
 
 
@@ -28,18 +29,14 @@ public class Stats : MonoBehaviour
         coinsUi.SetText(currentCoin + "");
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int damage)
     {
-        health -= amount;
-        onPlayedDamaged?.Invoke();
+        currentHealth -= damage;
+
+        uiManager.SetHealth(currentHealth);
+    }
 
 
-        if(health <= 0)
-        {
-            health = 0;
-            Debug.Log("You're Dead");
-        }
     }
     
 
-}

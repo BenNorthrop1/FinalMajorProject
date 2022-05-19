@@ -6,7 +6,8 @@ public class BreakableObject : MonoBehaviour
 {
     public GameObject desroyedVersion;
 
-    public PlayerInteraction pI;
+
+
 
     public GameObject Coin;
 
@@ -14,14 +15,11 @@ public class BreakableObject : MonoBehaviour
 
     public void Start()
     {
-
     }
 
     void Update()
     {
 
-        
-           
         
         
 
@@ -31,17 +29,7 @@ public class BreakableObject : MonoBehaviour
     
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if(pI.isPickedUp = true)
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-            }
-        }
-
-    }
+    
 
 
 

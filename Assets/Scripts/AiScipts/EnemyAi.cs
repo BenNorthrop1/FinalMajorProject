@@ -6,18 +6,26 @@ public class EnemyAi : MonoBehaviour
 {
     public NavMeshAgent agent;
 
+    public int damage;
+
     public GameObject Coin;
 
-    public Transform player;
+    private Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    private Animator anim;
+
     public float health;
+
+    public GameObject raycastObject;
 
     //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
+
+    private bool isDead;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -32,6 +40,7 @@ public class EnemyAi : MonoBehaviour
     {
         player = GameObject.Find("Character").transform;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -40,9 +49,22 @@ public class EnemyAi : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
+    if(!isDead)
+    {
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+
+    }
+
+        float Distance = Vector3.Distance(transform.position , player.position);
+
+        if( Distance <= agent.stoppingDistance)
+        {
+            anim.SetFloat("Speed", 0, 0.3f, Time.deltaTime);
+            AttackPlayer();
+        }
+
     }
 
     private void Patroling()
@@ -50,7 +72,8 @@ public class EnemyAi : MonoBehaviour
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
-            agent.SetDestination(walkPoint);
+        agent.SetDestination(walkPoint);
+        anim.SetFloat("Speed", 0.5f, 0.3f, Time.deltaTime);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
@@ -73,6 +96,12 @@ public class EnemyAi : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        anim.SetFloat("Speed", 1f, 0.3f, Time.deltaTime);
+
+        Vector3 newPlayer = player.position;
+
+		newPlayer.y = transform.position.y;
+		transform.LookAt(newPlayer);	
     }
 
     private void AttackPlayer()
@@ -80,12 +109,24 @@ public class EnemyAi : MonoBehaviour
 	    Vector3 newPlayer = player.position;
 
 		newPlayer.y = transform.position.y;
-		transform.LookAt(newPlayer);	
+		transform.LookAt(newPlayer);
 
+        
         if (!alreadyAttacked)
         {
             ///Attack code here
+            RaycastHit objectHit;
+            Vector3 fwd = raycastObject.transform.TransformDirection(Vector3.forward);
+            if (Physics.Raycast(raycastObject.transform.position, fwd, out objectHit, 20))
+            {
+                
+                Stats stats = objectHit.transform.GetComponent<Stats>();
 
+                if(stats != null)
+                {
+                    stats.TakeDamage(damage);
+                }
+            }
 
             ///End of attack code
 
@@ -106,8 +147,9 @@ public class EnemyAi : MonoBehaviour
 
     }
     private void DestroyEnemy()
-    {
-        Destroy(gameObject);
+    {   
+        anim.SetBool("IsDead", true);
+        Destroy(gameObject, 10f);
 
         int[] amount = new int[] {1, 2, 3, 4, 5};
 

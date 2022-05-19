@@ -32,14 +32,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform GroundCheck;
     public LayerMask groundmask; 
-    public Stamina stamina;
+
 
     private Vector3 velocity;
-
-    public GameObject standingSprite;
-    public GameObject crouchSprite;
-    public GameObject walkingSprite;
-    public GameObject runningSprite;
 
     
 
@@ -53,13 +48,7 @@ public class PlayerMovement : MonoBehaviour
   
     }
 
-    public void SetRunSpeed(float speed)
-    {
-        sprintingMoveSpeed = speed;
 
-
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -113,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
             controller.height = crouchingHeight;
             regularSpeedMoveSpeed *= crounchMultiplier;
 
+
         }
         else
         {
@@ -123,22 +113,13 @@ public class PlayerMovement : MonoBehaviour
         if(isSprinting == true)
         {
             regularSpeedMoveSpeed = sprintingMoveSpeed;
-
-            if(stamina.playerStamina > 0)
-            {
-                stamina.weAreSprinting = true;
-                stamina.Sprinting();
-            }
         }
         else
         {
             regularSpeedMoveSpeed = regularSpeed;
-            
 
         }
         controller.Move(move * regularSpeedMoveSpeed * Time.deltaTime);
-
-
 
 
 
@@ -175,7 +156,8 @@ public class PlayerMovement : MonoBehaviour
     void GetReferences(){
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
-        stamina = GetComponent<Stamina>();
+
     }
-    
+
+      
 }

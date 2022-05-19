@@ -46,7 +46,6 @@ public class PickupController : MonoBehaviour {
             }
         }
  
-        currentDistance += Input.GetAxis("Mouse ScrollWheel");
         currentDistance = Mathf.Clamp(currentDistance, 0.5f, distanceInFront);
     }
  
