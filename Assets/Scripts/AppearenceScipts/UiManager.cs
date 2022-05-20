@@ -1,21 +1,25 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
 
-
     public GameObject pauseMenu;
 
     public static bool isPaused;
-
+    
+    public static bool isRespawned;
+    public Transform spawnPoint;
+    public Transform player;
     public Slider slider;
 
     void Start()
     {
-
+        isRespawned = false;
         isPaused = false;
 
     }
@@ -36,7 +40,7 @@ public class UiManager : MonoBehaviour
     void Update()
     {
     
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape)&& !Stats.isDead == true)
         {
             if(isPaused)
             {
@@ -81,6 +85,17 @@ public class UiManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         isPaused = false;
+    }
+
+    public void returnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Respawn()
+    {
+        isRespawned = true;
+        player.position = spawnPoint.position;
     }
 
 

@@ -20,12 +20,10 @@ public class EnemyAi : MonoBehaviour
 
     public GameObject raycastObject;
 
-    //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
 
-    private bool isDead;
+
+    private static bool isDead;
+    private bool isHurt;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -41,6 +39,7 @@ public class EnemyAi : MonoBehaviour
         player = GameObject.Find("Character").transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        isHurt = false;
     }
 
     private void Update()
@@ -51,47 +50,29 @@ public class EnemyAi : MonoBehaviour
 
     if(!isDead)
     {
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
+
+        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        
+        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if(!playerInAttackRange && !playerInSightRange && !isHurt) Idle();
+        
+
+        if(!playerInAttackRange && !playerInSightRange && isHurt == true)
+        {
+            ChasePlayer();
+        }
     }
 
         float Distance = Vector3.Distance(transform.position , player.position);
 
         if( Distance <= agent.stoppingDistance)
         {
-            anim.SetFloat("Speed", 0, 0.3f, Time.deltaTime);
             AttackPlayer();
         }
 
     }
 
-    private void Patroling()
-    {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-        agent.SetDestination(walkPoint);
-        anim.SetFloat("Speed", 0.5f, 0.3f, Time.deltaTime);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-    }
-    private void SearchWalkPoint()
-    {
-        //Calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
-    }
 
     private void ChasePlayer()
     {
@@ -117,8 +98,10 @@ public class EnemyAi : MonoBehaviour
             ///Attack code here
             RaycastHit objectHit;
             Vector3 fwd = raycastObject.transform.TransformDirection(Vector3.forward);
-            if (Physics.Raycast(raycastObject.transform.position, fwd, out objectHit, 20))
+            if (Physics.Raycast(raycastObject.transform.position, fwd, out objectHit, 10))
             {
+
+                anim.SetTrigger("Attack");
                 
                 Stats stats = objectHit.transform.GetComponent<Stats>();
 
@@ -142,13 +125,19 @@ public class EnemyAi : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        isHurt = true;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (health <= 0)
+        {
+            Invoke(nameof(DestroyEnemy), 0.5f);
+            isDead = true;
+        }
 
     }
     private void DestroyEnemy()
     {   
         anim.SetBool("IsDead", true);
+        agent.SetDestination(transform.position);
         Destroy(gameObject, 10f);
 
         int[] amount = new int[] {1, 2, 3, 4, 5};
@@ -160,6 +149,12 @@ public class EnemyAi : MonoBehaviour
         {
             Instantiate(Coin, transform.position , transform.rotation);
         }
+    }
+
+    public void Idle()
+    {
+        anim.SetFloat("Speed", 0, 0.3f, Time.deltaTime);
+        agent.SetDestination(transform.position);
     }
 
     private void OnDrawGizmosSelected()
