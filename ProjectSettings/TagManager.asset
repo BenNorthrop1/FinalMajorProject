@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - Light
   - Weapon
+  - Look
   layers:
   - Default
   - TransparentFX
@@ -26,9 +27,9 @@ TagManager:
   - 
   - muzzle
   - 
+  - House
   - 
-  - 
-  - 
+  - Look
   - 
   - 
   - 

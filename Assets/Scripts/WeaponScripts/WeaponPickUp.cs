@@ -28,9 +28,7 @@ public class WeaponPickUp : MonoBehaviour, IInteractable
         weaponSwitch = gunpos.GetComponent<WeaponSwitch>();
         weaponScript = GetComponent<WeaponScript>();
 
-        if (
-            !equipped // this checks if it is equipped
-        )
+        if (!equipped)
         {
             weaponScript.enabled = false; //then enables the weapon script
             coll.isTrigger = false; // this disables the trigger

@@ -30,6 +30,8 @@ public class Stats : MonoBehaviour
         currentHealth = maxHealth;
         uiManager.SetMaxHealth(maxHealth);
 
+        
+
         playerMovement.enabled = true;
         mouseLook.enabled = true;
         Time.timeScale = 1;
@@ -44,14 +46,6 @@ public class Stats : MonoBehaviour
     {
         coinsUi.SetText(currentCoin + "");
 
-        if(UiManager.isRespawned)
-        {    
-            deathScreen.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            playerMovement.enabled = true;
-            mouseLook.enabled = true;
-            Time.timeScale = 1;
-        }
 
        
     }

@@ -6,13 +6,18 @@ using static Stats;
 public class VendingMachine : MonoBehaviour, IInteractable
 {
 
-    public GameObject reward;
+    public GameObject[] rewards;
+
+    public int Price;
+    
+    private GameObject reward;
+    private int index;
 
     public Transform rewardSpawnPos;
 
     public string GetDescription()
     {
-        return "Use Vending Machine";
+        return "Use Vending Machine for : " + Price.ToString();
     }
 
     public void Interact()
@@ -40,7 +45,10 @@ public class VendingMachine : MonoBehaviour, IInteractable
         }
         else
         {
-            currentCoin--;
+            currentCoin -= Price;
+
+            index = Random.Range(0, rewards.Length);
+            reward = rewards[index];
 
             Instantiate(reward, rewardSpawnPos.position , transform.rotation);
         }

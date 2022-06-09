@@ -4,8 +4,8 @@ using UnityEngine.AI;
 
 public class Spawner : MonoBehaviour
 {
-    public  EnemyAi enemy;
-    private List<EnemyAi> enemies;
+    public  EnemyScript enemy;
+    private List<EnemyScript> enemies;
     
     [Range (0,100)]
     public int numberOfEnemies = 25;
@@ -13,10 +13,10 @@ public class Spawner : MonoBehaviour
     
     void Start()
     {
-        enemies = new List<EnemyAi>(); // init as type
+        enemies = new List<EnemyScript>(); // init as type
         for (int index = 0; index < numberOfEnemies; index++)
         {
-            EnemyAi spawned = Instantiate(enemy, RandomNavmeshLocation(range), Quaternion.identity) as EnemyAi;
+            EnemyScript spawned = Instantiate(enemy, RandomNavmeshLocation(range), Quaternion.identity) as EnemyScript;
             enemies.Add(spawned);
         }
     }

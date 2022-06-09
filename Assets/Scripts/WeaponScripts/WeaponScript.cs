@@ -42,17 +42,8 @@ public class WeaponScript : MonoBehaviour
     [Header("WeaponReferences")]
     public TextMeshProUGUI AmmoUi;
 
-    public LayerMask
+    public LayerMask Enemy, Player;
 
-            Enemy,
-            Player;
-
-    [Header("Hipfire Recoil")]
-    public float recoilX;
-
-    public float recoilY;
-
-    public float recoilZ;
 
     [Header("Settings")]
     public float snappiness;
@@ -66,8 +57,6 @@ public class WeaponScript : MonoBehaviour
             reloading;
 
     private WeaponPickUp weaponPickUp;
-
-    private Recoil recoilScript;
 
     //public Camera WeaponCam;
     public RaycastHit rayHit;
@@ -135,17 +124,10 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
-    internal void SetActive(bool v)
-    {
-        throw new System.NotImplementedException();
-    }
 
     private void Shoot()
     {
         muzzleflash.Play();
-
-        recoilScript = GetComponentInParent<Recoil>();
-        recoilScript.RecoilFire();
 
         readyToShoot = false;
 
@@ -155,19 +137,14 @@ public class WeaponScript : MonoBehaviour
         Vector3 direction = mainCam.transform.forward + new Vector3(x, y, 0);
 
         if (
-            Physics
-                .Raycast(mainCam.transform.position,
-                direction,
-                out rayHit,
-                range,
-                ~Player)
+            Physics.Raycast(mainCam.transform.position,direction,out rayHit,range, ~Player)
         )
         {
             //This makes it so if the object has the Targert Script it takes damage
-            EnemyAi enemy = rayHit.transform.GetComponent<EnemyAi>();
+            EnemyScript enemy = rayHit.transform.GetComponent<EnemyScript>();
             if (enemy != null)
             {
-                enemy.TakeDamage (damage);
+                enemy.TakeDamage(damage);
             }
 
             //This makes it so if the object has the crate script it breaks it

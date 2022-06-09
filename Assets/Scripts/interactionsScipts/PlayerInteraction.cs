@@ -13,7 +13,9 @@ public static bool isPickedUp;
 private WeaponPickUp weaponPickUp;
 
 public GameObject interactionUI;
+
 public TextMeshProUGUI interactionText;
+public TextMeshProUGUI pickUpText;
 
 private void Awake()
 {
@@ -43,8 +45,15 @@ void InteractionRay() {
             }
         }
 
-
-        if(Input.GetKeyDown(KeyCode.E)&& !weaponPickUp.equipped)
+        if(hit.collider.tag == "Weapon")
+        {
+            pickUpText.text = "F";
+        }
+        else
+        {
+            pickUpText.text = "E";
+        }
+        if(Input.GetKeyDown(KeyCode.F)&& !weaponPickUp.equipped)
         {
             weaponPickUp.Pickup();
         }
@@ -58,6 +67,4 @@ void InteractionRay() {
     interactionUI.SetActive(hitSomething);
 }
 }
-
-
 

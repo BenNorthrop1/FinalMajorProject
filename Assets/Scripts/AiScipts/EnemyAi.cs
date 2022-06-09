@@ -23,7 +23,6 @@ public class EnemyAi : MonoBehaviour
 
 
     private static bool isDead;
-    private bool isHurt;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -39,7 +38,7 @@ public class EnemyAi : MonoBehaviour
         player = GameObject.Find("Character").transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-        isHurt = false;
+
     }
 
     private void Update()
@@ -55,13 +54,8 @@ public class EnemyAi : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
-        if(!playerInAttackRange && !playerInSightRange && !isHurt) Idle();
+        if(!playerInAttackRange && !playerInSightRange) Idle();
         
-
-        if(!playerInAttackRange && !playerInSightRange && isHurt == true)
-        {
-            ChasePlayer();
-        }
     }
 
         float Distance = Vector3.Distance(transform.position , player.position);
@@ -125,7 +119,6 @@ public class EnemyAi : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        isHurt = true;
 
         if (health <= 0)
         {
